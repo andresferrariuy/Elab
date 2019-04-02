@@ -25,7 +25,6 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "vPASSWORD").send_keys "123456AD"
     @driver.find_element(:id, "BTNLOGIN").click
     sleep 2
-    @driver.find_element(:id, "vMENU").click
     Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "vMENU")).select_by(:text, "RECEPCION")
     @driver.find_element(:id, "vMENU").click
     @driver.find_element(:id, "BTNCONFIRMAR").click
@@ -38,6 +37,7 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "vPEST_ID").clear
     @driver.find_element(:id, "vPEST_ID").send_keys("3200", :tab)
     sleep 3
+    Estudio = @driver.find_element(:id, "span_vPEST_NOMBRE").text
     @driver.find_element(:id, "CTLSELECCIONA_0001").click
     @driver.find_element(:id, "CTLMUE_ORI_ID_0001").click
     Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "Exudado nasal")
@@ -54,12 +54,16 @@ describe "UntitledTestCase" do
     @driver.find_element(:link, "CARMELO").click
     sleep 5
     @driver.switch_to().frame(0)
+    @driver.find_element(:id, "vDESDE").send_keys (FechaSol)
+    @driver.find_element(:id, "vHASTA").send_keys (FechaSol)
     @driver.find_element(:id, "BUTTON1").click
     sleep 5
-    @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='Ubicación'])[1]/following::span[1]").click
-    @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='Ubicación'])[1]/following::span[1]").click
-    sleep 20
-    @driver.find_element(:id, "span_SOL_FECHA_0002").text.should == FechaSol
+
+    @driver.find_element(:id, "span_SOL_NUMERO_0001").text.should == ""
+    @driver.find_element(:id, "vFORMULARIO_0001").click
+    sleep 5
+    NroSol = @driver.find_element(:id, "span_SOL_NUMERO_0001").text
+    @driver.find_element(:id, "span_SOL_NUMERO_0001").text.should_not == ""
 
   end
 

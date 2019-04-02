@@ -37,13 +37,14 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "INSERT").click
     sleep 3
     @driver.find_element(:id, "vPEST_ID").clear
-    @driver.find_element(:id, "vPEST_ID").send_keys("3200", :tab)
+    @driver.find_element(:id, "vPEST_ID").send_keys("401", :tab)
     sleep 3
     @driver.find_element(:id, "CTLSELECCIONA_0001").click
     @driver.find_element(:id, "CTLMUE_ORI_ID_0001").click
-    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "Exudado nasal")
+    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "BIOPSIA")
     @driver.find_element(:id, "BUTTON1").click
     sleep 3
+    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "vSOL_PACIENTETIPODOCD")).select_by(:text, "PASAPORTE")
     @driver.find_element(:id, "BTN_ENTER").click
     @driver.switch_to().alert().text. should == "Ingrese Pais, Tipo Documento y Nº de Documento"
     @driver.switch_to().alert().accept()

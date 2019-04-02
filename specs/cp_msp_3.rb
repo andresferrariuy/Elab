@@ -44,6 +44,7 @@ describe "UntitledTestCase" do
     Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "Exudado nasal")
     @driver.find_element(:id, "BUTTON1").click
     sleep 3
+    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "vSOL_PACIENTETIPODOCD")).select_by(:text, "PASAPORTE")
     @driver.find_element(:id, "BTN_ENTER").click
     @driver.switch_to().alert().text. should == "Ingrese Pais, Tipo Documento y Nº de Documento"
     @driver.switch_to().alert().accept()

@@ -25,8 +25,6 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "vPASSWORD").send_keys "123456AD"
     @driver.find_element(:id, "BTNLOGIN").click
     sleep 2
-    @driver.find_element(:id, "vMENU").click
-    sleep 2
     Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "vMENU")).select_by(:text, "RECEPCION")
     @driver.find_element(:id, "vMENU").click
     @driver.find_element(:id, "BTNCONFIRMAR").click
@@ -37,19 +35,35 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "INSERT").click
     sleep 3
     @driver.find_element(:id, "vPEST_ID").clear
-    @driver.find_element(:id, "vPEST_ID").send_keys("3200", :tab)
+    @driver.find_element(:id, "vPEST_ID").send_keys("401", :tab)
     sleep 3
+    Estudio = @driver.find_element(:id, "span_vPEST_NOMBRE").text
     @driver.find_element(:id, "CTLSELECCIONA_0001").click
     @driver.find_element(:id, "CTLMUE_ORI_ID_0001").click
-    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "Exudado nasal")
+    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "CTLMUE_ORI_ID_0001")).select_by(:text, "BIOPSIA")
     @driver.find_element(:id, "BUTTON1").click
     sleep 3
+    FechaSol = @driver.find_element(:id, "span_SOL_FECHA").text
+    @driver.find_element(:id, "vSOL_PACIENTENRODOCUMENTO").send_keys "30217463"
     @driver.find_element(:id, "BTN_ENTER").click
-    @driver.switch_to().alert().text. should == "Ingrese Pais, Tipo Documento y Nº de Documento"
-    @driver.switch_to().alert().accept()
     sleep 3
-    @driver.switch_to().alert().text. should == "Debe especificar un paciente"
-    @driver.switch_to().alert().accept()
+    @driver.find_element(:id, "PROMPT_PPACIE_ID_CPACIE_NOMBREPRIMER_CPACIE_APELLIDOPRIMER_CPACIE_APELLIDOSEGUNDO").click
+    sleep 5
+    @driver.switch_to().frame(0)
+    @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='Nro. Documento'])[1]/following::input[1]").send_keys("30217463",:tab)
+    @driver.find_element(:link, "CARMELO").click
+    sleep 5
+    @driver.switch_to().frame(0)
+    @driver.find_element(:id, "vDESDE").send_keys (FechaSol)
+    @driver.find_element(:id, "vHASTA").send_keys (FechaSol)
+    @driver.find_element(:id, "BUTTON1").click
+    sleep 5
+    @driver.find_element(:id, "span_SOL_NUMERO_0001").text.should == ""
+    @driver.find_element(:id, "vFORMULARIO_0001").click
+    sleep 5
+    NroSol = @driver.find_element(:id, "span_SOL_NUMERO_0001").text
+    @driver.find_element(:id, "span_SOL_NUMERO_0001").text.should_not == ""
+
   end
 
 end
