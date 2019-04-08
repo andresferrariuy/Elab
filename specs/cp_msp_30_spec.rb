@@ -30,10 +30,10 @@ describe "UntitledTestCase" do
     @driver.find_element(:id, "BTNCONFIRMAR").click
     sleep 3
     @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='.'])[1]/following::span[2]").click
+    sleep 1
     @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='Ayuda'])[1]/following::td[2]").click
     sleep 3
-    @driver.find_element(:id, "vFECHADESDE").send_keys("253453453453")
-    @driver.find_element(:id, "IMAGE1").click
+    @driver.find_element(:id, "vFECHADESDE").send_keys("253453453453", :tab)
     sleep 3
     @driver.find_element(:id, "vFECHADESDE_Balloon").displayed? == true
     @driver.find_element(:id, "vFECHADESDE_Balloon").text.should == "Fecha inválida"

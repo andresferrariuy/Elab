@@ -34,17 +34,13 @@ describe "UntitledTestCase" do
     @driver.find_element(:xpath, "(.//*[normalize-space(text()) and normalize-space(.)='Ayuda'])[1]/following::td[2]").click
     sleep 3
     @driver.find_element(:id, "vFECHADESDE").send_keys("01/04/18")
-    @driver.find_element(:id, "vFECHAHASTA").send_keys("01/02/19")
-    FechaDate = DateTime.parse("01/02/2019", "%dd/%mm/%YYYY")
-    @driver.find_element(:id, "IMAGE1").click
     sleep 3
-    @driver.find_element(:id, "SolicitudesContainerRow_0001").displayed? == true
-    FechaMayor = @driver.find_element(:id, "span_vSOL_FECHAHORA_0001").text
-    FechaMayorDate = DateTime.parse(FechaMayor, "%dd/%mm/%YYYY %HH:%MM")
-    FechaDate = FechaDate.strftime("%Y%m%d%H%M")
-    FechaMayorDate = FechaMayorDate.strftime("%Y%m%d%H%M")
-    FechaMayorDate.should <= FechaDate
-
+    @driver.find_element(:id, "vSOLICITUDESTADO").click
+    Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, "vSOLICITUDESTADO")).select_by(:text, "(todos)")
+    sleep 5
+    @driver.find_element(:id, "vEST_ID").send_keys("160", :tab)
+    @driver.find_element(:id, "IMAGE1").click
+    sleep 20
   end
 
 end
